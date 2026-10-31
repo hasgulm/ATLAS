@@ -23,7 +23,7 @@
     ".ar-car h3{margin:0;font-size:17px}.ar-car .tr{font-size:12.5px;color:var(--ink-3)}" +
     ".ar-car .pr{font-size:24px;font-weight:800;letter-spacing:-.02em;margin-top:6px;font-variant-numeric:tabular-nums}" +
     ".ar-car .dl{font-size:13px;color:var(--ink-2)}.ar-car .dl b{color:var(--up)}" +
-    ".ar-car .ch{font-size:13px;font-weight:600}.ar-car .nt{font-size:12px;color:var(--ink-3)}" +
+    ".ar-car .sr{font-size:12.5px;font-weight:600;text-decoration:none;margin-top:4px}.ar-car .ch{font-size:13px;font-weight:600}.ar-car .nt{font-size:12px;color:var(--ink-3)}" +
     ".up{color:var(--up)}.dn{color:var(--down)}.fl{color:var(--ink-3)}" +
     ".ar-kpi{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin:14px 0}" +
     ".ar-kpi .card{padding:16px}.ar-kpi .k{font-size:12.5px;font-weight:600;color:var(--ink-2)}.ar-kpi .v{font-size:22px;font-weight:800;margin-top:4px;font-variant-numeric:tabular-nums}.ar-kpi .s{font-size:12.5px;margin-top:2px}" +
@@ -63,14 +63,14 @@
         var p = m.list[cur], q = prev ? m.list[prev] : null, dl = m.deal && m.deal[cur];
         var ch = q ? '<span class="ch ' + cls(p / q - 1) + '">' + (Math.abs(p / q - 1) < 0.0005 ? "Geçen aya göre değişmedi" : pc(p / q - 1) + " geçen aya göre") + "</span>" : "";
         cards.push('<div class="card ar-car"><span class="sg">' + esc(s.name) + " · " + esc(s.desc) + "</span><h3>" + esc(m.name) + '</h3><span class="tr">En uygun donanım: ' + esc(m.trim) + '</span><span class="pr">' + mil(p) + "</span>" +
-          (dl ? '<span class="dl">Kampanyalı: <b>' + mil(dl) + "</b></span>" : "") + ch + (m.note ? '<span class="nt">' + esc(m.note) + "</span>" : "") + "</div>");
+          (dl ? '<span class="dl">Kampanyalı: <b>' + mil(dl) + "</b></span>" : "") + ch + (m.note ? '<span class="nt">' + esc(m.note) + "</span>" : "") + (m.src ? '<a class="sr" href="' + esc(m.src[1]) + '" target="_blank" rel="noopener">Kaynak: ' + esc(m.src[0]) + " resmi fiyat listesi ↗</a>" : "") + "</div>");
       });
     });
     return '<div class="ar-sec"><span class="eyebrow">Sıfır araç · Türkiye</span><h2 class="h-sec">' + ay(cur) + " liste fiyatları</h2>" +
       '<p class="sub">Her segmentten bilinen modellerin en uygun donanımdaki başlangıç fiyatı.</p>' +
       '<div class="ar-tabs" role="group" aria-label="Segment">' + tabs.map(function (t) { return '<button type="button" class="chip" data-arseg="' + t[0] + '" aria-pressed="' + (seg === t[0]) + '">' + esc(t[1]) + "</button>"; }).join("") + "</div>" +
       '<div class="ar-grid">' + cards.join("") + "</div>" +
-      '<p class="ar-src">Kaynak: ' + esc(S.source) + ' (<a href="' + esc(S.sourceUrl) + '" target="_blank" rel="noopener">fiyat listeleri</a>). Fiyatlar anahtar teslim liste fiyatıdır; bayiye göre değişebilir. Güncel fiyat için yetkili satıcıya danışın.</p></div>';
+      '<p class="ar-src">Kaynak: Her kartta bağlantısı verilen markanın resmi fiyat listesi; aylık derleme için <a href="' + esc(S.sourceUrl) + '" target="_blank" rel="noopener">araclo.com</a>. Fiyatlar anahtar teslim liste fiyatıdır; bayiye göre değişebilir. Güncel fiyat için yetkili satıcıya danışın.</p></div>';
   }
 
   function usedCars() {

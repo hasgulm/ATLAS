@@ -20,7 +20,11 @@
        "2026-09": 1435000,
        "2026-10": 1460000
       },
-      "deal": {}
+      "deal": {},
+      "src": [
+       "Kia",
+       "https://www.kia.com/tr/satis-merkezi/fiyat-listesi.html"
+      ]
      }
     ]
    },
@@ -39,7 +43,11 @@
       "deal": {
        "2026-10": 1390000
       },
-      "note": "Ekim'de yeni model yılına geçti"
+      "note": "Ekim'de yeni model yılına geçti",
+      "src": [
+       "Dacia",
+       "https://best.renault.com.tr/dacia/fiyat-listesi/?kat=all"
+      ]
      },
      {
       "name": "Hyundai i20",
@@ -51,7 +59,11 @@
       "deal": {
        "2026-09": 1555000,
        "2026-10": 1575000
-      }
+      },
+      "src": [
+       "Hyundai",
+       "https://www.hyundai.com/tr/tr/satis/fiyat-listesi.html"
+      ]
      },
      {
       "name": "Renault Clio",
@@ -60,7 +72,11 @@
        "2026-09": 1830000,
        "2026-10": 1830000
       },
-      "deal": {}
+      "deal": {},
+      "src": [
+       "Renault",
+       "https://best.renault.com.tr/fiyat-listesi/?kat=Binek"
+      ]
      }
     ]
    },
@@ -79,7 +95,11 @@
       "deal": {
        "2026-09": 1449900,
        "2026-10": 1449900
-      }
+      },
+      "src": [
+       "Fiat",
+       "https://talep.fiat.com.tr/fiyat-listesi/Binek-Ara%C3%A7-Fiyat-Listesi"
+      ]
      },
      {
       "name": "Renault Megane Sedan",
@@ -88,7 +108,11 @@
        "2026-09": 1841000,
        "2026-10": 1841000
       },
-      "deal": {}
+      "deal": {},
+      "src": [
+       "Renault",
+       "https://best.renault.com.tr/fiyat-listesi/?kat=Binek"
+      ]
      },
      {
       "name": "Toyota Corolla",
@@ -100,7 +124,11 @@
       "deal": {
        "2026-09": 1850000,
        "2026-10": 1965000
-      }
+      },
+      "src": [
+       "Toyota",
+       "https://turkiye.toyota.com.tr/middle/fiyat-listesi/"
+      ]
      }
     ]
    },
@@ -116,7 +144,11 @@
        "2026-09": 1865000,
        "2026-10": 1865000
       },
-      "deal": {}
+      "deal": {},
+      "src": [
+       "Renault",
+       "https://best.renault.com.tr/fiyat-listesi/?kat=Binek"
+      ]
      },
      {
       "name": "Togg T10X",
@@ -125,7 +157,11 @@
        "2026-09": 1909048,
        "2026-10": 1909048
       },
-      "deal": {}
+      "deal": {},
+      "src": [
+       "Togg",
+       "https://www.togg.com.tr/tr/price-list"
+      ]
      },
      {
       "name": "Kia Sportage",
@@ -137,7 +173,54 @@
       "deal": {
        "2026-09": 2149000,
        "2026-10": 2099000
-      }
+      },
+      "src": [
+       "Kia",
+       "https://www.kia.com/tr/satis-merkezi/fiyat-listesi.html"
+      ]
+     },
+     {
+      "name": "Nissan Qashqai",
+      "trim": "1.3 DIG-T Mild Hybrid 158 PS Designpack",
+      "list": {
+       "2026-10": 2855800
+      },
+      "deal": {
+       "2026-10": 2269000
+      },
+      "note": "Bu donanım Eylül listesinde yoktu",
+      "src": [
+       "Nissan",
+       "https://www.nissan.com.tr/fiyat-listesi/sifir-arac-fiyatlari-2026.html"
+      ]
+     },
+     {
+      "name": "Peugeot 3008",
+      "trim": "Allure 1.2 Hybrid 145 hp eDCS6",
+      "list": {
+       "2026-09": 2967000,
+       "2026-10": 2967000
+      },
+      "deal": {
+       "2026-10": 2755000
+      },
+      "src": [
+       "Peugeot",
+       "https://kampanya.peugeot.com.tr/fiyat-listesi/"
+      ]
+     },
+     {
+      "name": "CUPRA Formentor",
+      "trim": "1.5 eTSI 150 PS DSG Impulse (2026)",
+      "list": {
+       "2026-09": 2860000,
+       "2026-10": 2860000
+      },
+      "deal": {},
+      "src": [
+       "CUPRA",
+       "https://www.cupraofficial.com.tr/cupra-sahipleri/fiyat-listesi"
+      ]
      }
     ]
    },
@@ -153,7 +236,11 @@
        "2026-09": 3774900,
        "2026-10": 3774900
       },
-      "deal": {}
+      "deal": {},
+      "src": [
+       "Škoda",
+       "https://www.skoda.com.tr/fiyat-listesi"
+      ]
      },
      {
       "name": "Volkswagen Passat",
@@ -162,7 +249,11 @@
        "2026-09": 4010000,
        "2026-10": 4010000
       },
-      "deal": {}
+      "deal": {},
+      "src": [
+       "Volkswagen",
+       "https://binekarac.vw.com.tr/tr/modeller-fiyatlar/volkswagen-fiyat-listesi.html"
+      ]
      }
     ]
    }
