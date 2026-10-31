@@ -1,0 +1,250 @@
+{
+ "updated": "2026-10-31",
+ "sifir": {
+  "source": "Markaların resmi fiyat listeleri (araclo.com derlemesi)",
+  "sourceUrl": "https://www.araclo.com/sifir-arac-fiyatlari",
+  "months": [
+   "2026-09",
+   "2026-10"
+  ],
+  "segments": [
+   {
+    "id": "A",
+    "name": "A segmenti",
+    "desc": "Mini şehir otomobili",
+    "models": [
+     {
+      "name": "Kia Picanto",
+      "trim": "1.0L 67 PS AMT",
+      "list": {
+       "2026-09": 1435000,
+       "2026-10": 1460000
+      },
+      "deal": {}
+     }
+    ]
+   },
+   {
+    "id": "B",
+    "name": "B segmenti",
+    "desc": "Küçük otomobil",
+    "models": [
+     {
+      "name": "Dacia Sandero",
+      "trim": "expression TCe 100",
+      "list": {
+       "2026-09": 1338000,
+       "2026-10": 1460000
+      },
+      "deal": {
+       "2026-10": 1390000
+      },
+      "note": "Ekim'de yeni model yılına geçti"
+     },
+     {
+      "name": "Hyundai i20",
+      "trim": "1.0 T-GDI 90 PS Jump",
+      "list": {
+       "2026-09": 1562000,
+       "2026-10": 1582000
+      },
+      "deal": {
+       "2026-09": 1555000,
+       "2026-10": 1575000
+      }
+     },
+     {
+      "name": "Renault Clio",
+      "trim": "evolution plus TCe EDC 115",
+      "list": {
+       "2026-09": 1830000,
+       "2026-10": 1830000
+      },
+      "deal": {}
+     }
+    ]
+   },
+   {
+    "id": "C",
+    "name": "C segmenti",
+    "desc": "Orta sınıf sedan ve hatchback",
+    "models": [
+     {
+      "name": "Fiat Egea Sedan",
+      "trim": "Easy 1.6 MultiJet 130 HP",
+      "list": {
+       "2026-09": 1499900,
+       "2026-10": 1499900
+      },
+      "deal": {
+       "2026-09": 1449900,
+       "2026-10": 1449900
+      }
+     },
+     {
+      "name": "Renault Megane Sedan",
+      "trim": "Touch 1.3 TCe 140",
+      "list": {
+       "2026-09": 1841000,
+       "2026-10": 1841000
+      },
+      "deal": {}
+     },
+     {
+      "name": "Toyota Corolla",
+      "trim": "1.5 Vision Plus Multidrive S",
+      "list": {
+       "2026-09": 2545500,
+       "2026-10": 2545500
+      },
+      "deal": {
+       "2026-09": 1850000,
+       "2026-10": 1965000
+      }
+     }
+    ]
+   },
+   {
+    "id": "SUV",
+    "name": "SUV",
+    "desc": "Kompakt SUV",
+    "models": [
+     {
+      "name": "Renault Duster",
+      "trim": "evolution Eco-G 120 (LPG)",
+      "list": {
+       "2026-09": 1865000,
+       "2026-10": 1865000
+      },
+      "deal": {}
+     },
+     {
+      "name": "Togg T10X",
+      "trim": "V1 RWD Standart Menzil",
+      "list": {
+       "2026-09": 1909048,
+       "2026-10": 1909048
+      },
+      "deal": {}
+     },
+     {
+      "name": "Kia Sportage",
+      "trim": "1.6L 150 PS DCT Live",
+      "list": {
+       "2026-09": 2249000,
+       "2026-10": 2249000
+      },
+      "deal": {
+       "2026-09": 2149000,
+       "2026-10": 2099000
+      }
+     }
+    ]
+   },
+   {
+    "id": "D",
+    "name": "D segmenti",
+    "desc": "Üst orta sınıf",
+    "models": [
+     {
+      "name": "Škoda Superb",
+      "trim": "Premium 1.5 TSI mHEV 150 PS DSG",
+      "list": {
+       "2026-09": 3774900,
+       "2026-10": 3774900
+      },
+      "deal": {}
+     },
+     {
+      "name": "Volkswagen Passat",
+      "trim": "1.5 eTSI 150 PS DSG Impression",
+      "list": {
+       "2026-09": 4010000,
+       "2026-10": 4010000
+      },
+      "deal": {}
+     }
+    ]
+   }
+  ]
+ },
+ "ikinciEl": {
+  "source": "sahibindex Otomobil Piyasası Görünümü (sahibinden.com ve Bahçeşehir Üniversitesi BETAM)",
+  "sourceUrl": "https://betam.bahcesehir.edu.tr/kategori/ekonomik-arastirmalar/yayinlar/otomotiv-piyasasi-gorunumu/",
+  "months": [
+   "2025-10",
+   "2025-11",
+   "2025-12",
+   "2026-01",
+   "2026-02",
+   "2026-03",
+   "2026-04",
+   "2026-05",
+   "2026-06"
+  ],
+  "overall": [
+   1086000,
+   1101000,
+   1108000,
+   1149000,
+   1159000,
+   1160000,
+   1168000,
+   1175000,
+   1169000
+  ],
+  "yoy": {
+   "2026-06": 0.207
+  },
+  "segments": {
+   "B": [
+    717211,
+    731740,
+    null,
+    747418,
+    null,
+    759039,
+    null,
+    null,
+    770421
+   ],
+   "C": [
+    960603,
+    974458,
+    null,
+    1008000,
+    null,
+    1020000,
+    null,
+    null,
+    1039000
+   ],
+   "D": [
+    1379000,
+    1406000,
+    null,
+    1453000,
+    null,
+    1467000,
+    null,
+    null,
+    1497000
+   ],
+   "E": [
+    2245000,
+    2266000,
+    null,
+    2404000,
+    null,
+    2456000,
+    null,
+    null,
+    2457000
+   ]
+  },
+  "realYoy": {
+   "2026-06": -0.086
+  }
+ },
+ "antalya": null
+}

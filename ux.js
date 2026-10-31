@@ -60,6 +60,7 @@
       var k = c.getAttribute("data-asset"), nm = $(".nm", c);
       if (!$(".dtag", c)) c.insertAdjacentHTML("beforeend", tag(REAL_KEYS.indexOf(k) >= 0));
       if (k === "borsa" && nm && !$(".qmark", nm)) nm.insertAdjacentHTML("beforeend", q("bist"));
+      if (k === "otomobil") c.setAttribute("href", "#arac");
       if (!L) return;
       var f = LIVE[k];
       if (f && L[f]) {
@@ -77,6 +78,8 @@
     });
     var as = $("#asOf");
     if (as && L && L.updated) as.textContent = "Son güncelleme: " + new Date(L.updated).toLocaleString("tr-TR", { day: "numeric", month: "long", hour: "2-digit", minute: "2-digit" });
+    var fd = $("#footDate");
+    if (fd && L && L.updated) fd.textContent = "Veri tarihi: " + new Date(L.updated).toLocaleDateString("tr-TR", { day: "numeric", month: "long", year: "numeric" });
     swipeHint($("#markets"));
   }
   function fixForecasts() {
@@ -108,8 +111,8 @@
     pop = document.createElement("div"); pop.className = "info-pop"; pop.setAttribute("role", "dialog"); pop.setAttribute("aria-label", "Hangi veriler gerçek?");
     pop.innerHTML = '<button type="button" class="x" aria-label="Kapat">×</button><h3>Hangi veriler gerçek?</h3>' +
       "<h4>Gerçek veriler</h4><ul><li>Canlı piyasa kutusu: dolar, euro, gram altın, Bitcoin, TCMB faizi, mevduat faizi ve enflasyon</li>" +
-      "<li>Dolar, euro, altın ve Bitcoin grafikleri (2019'dan bugüne haftalık)</li><li>Enflasyon (TÜFE) geçmişi ve hesaplayıcılardaki oranlar</li><li>Gündem bölümündeki haber başlıkları</li></ul>" +
-      "<h4>Örnek (simüle) veriler</h4><ul><li>Borsa, konut ve otomobil fiyatları</li><li>Mevduat faizinin geçmişi</li><li>Gelecek tahminlerinin tamamı</li></ul>" +
+      "<li>Dolar, euro, altın ve Bitcoin grafikleri (2019'dan bugüne haftalık)</li><li>Enflasyon (TÜFE) geçmişi ve hesaplayıcılardaki oranlar</li><li>Gündem bölümündeki haber başlıkları</li><li>Araç Fiyatları sayfasındaki sıfır araç ve sahibinden ikinci el fiyatları</li></ul>" +
+      "<h4>Örnek (simüle) veriler</h4><ul><li>Borsa, konut fiyatları ve ana sayfadaki otomobil kartı</li><li>Mevduat faizinin geçmişi</li><li>Gelecek tahminlerinin tamamı</li></ul>" +
       "<p>Kartlardaki <b>canlı</b> ve <b>örnek veri</b> etiketleri bu ayrımı gösterir. ATLAS bir prototiptir; hiçbir bilgi yatırım tavsiyesi değildir.</p>";
     document.body.appendChild(pop);
     var r = btn.getBoundingClientRect();
