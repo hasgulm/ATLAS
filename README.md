@@ -12,3 +12,7 @@ Yatırımları karşılaştırma prototipi. Canlı adres: https://atlas-yatirim.
 `EVDS_API_KEY` Vercel'de ortam değişkeni olarak tanımlıdır; depoya konmaz.
 
 Borsa, konut, otomobil ve mevduat geçmişi ile tahminler simüledir. Yatırım tavsiyesi değildir.
+
+## Yayın
+
+`main` dalına yapılan her push, Vercel'de https://atlas-yatirim.vercel.app adresine otomatik olarak yayınlanır.
