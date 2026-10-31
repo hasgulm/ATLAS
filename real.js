@@ -62,8 +62,6 @@
     fixTexts();
     var lv = document.getElementById("live");
     if (lv && window.MutationObserver) new MutationObserver(fixTexts).observe(lv, { childList: true });
-    var p = document.querySelector(".proto");
-    if (p) p.setAttribute("data-tip", "Bu bir prototiptir. Canlı piyasa kutusu, haberler ile döviz, altın, Bitcoin ve enflasyon geçmişi gerçek veridir. Borsa, konut, otomobil ve mevduat geçmişi ile tahminler simüledir. Yatırım tavsiyesi değildir.");
   }
   ["renderCompare", "renderForecast", "renderHomeChart"].forEach(function (n) { wrap(n, function () { fixBadges(); }); });
 

@@ -9,7 +9,7 @@ const c=e*t+a,s=4*c,r=n+22*(D[c]-.5)+10*(M[c]-.5),l=(t,a,e=7)=>R((r-t)/e+.5)*R((
 ;const u=C[s]/255,p=.85+.3*D[c],x=10*p+20*u*.7,y=30*p+55*u*.7,E=62*p+80*u*.7,S=w[s]/255,P=j[s]/255*.35*S;v[s]=(x*(1-S)+f*S)*(1-P)+220*P,v[s+1]=(y*(1-S)+g*S)*(1-P)+225*P,v[s+2]=(E*(1-S)+h*S)*(1-P)+230*P,v[s+3]=255,k.data[s]=k.data[s+1]=k.data[s+2]=200*(1-S),k.data[s+3]=255}}S.putImageData(P,0,0),T.putImageData(k,0,0)
 ;const _=1024,F=512,L=y(_,F,7),Q=y(_,F,5),W=c(_,F),X=W.getContext("2d"),Y=X.createImageData(_,F);for(let t=0;t<_*F;t++){const a=255*Math.pow(R(3.2*(.7*L[t]+.3*Q[t]-.52)),1.3);Y.data[4*t]=Y.data[4*t+1]=Y.data[4*t+2]=a,Y.data[4*t+3]=255}return X.putImageData(Y,0,0),{day:E,spec:A,cloud:W}}();
 (function(){"use strict";
-var pb=document.querySelector(".proto");if(pb){pb.textContent="Prototip · canlı + simüle veri";pb.setAttribute("data-tip","Bu bir prototiptir. Canlı piyasa kutusu ve kaynağı belirtilen haberler gerçek verilerdir. Grafikler, fiyat geçmişi ve tahminler simüle veridir. Yatırım tavsiyesi değildir.")}
+
 var mk=document.getElementById("markets");if(!mk)return;var el=document.createElement("div");el.className="live";el.id="live";el.hidden=true;mk.parentNode.insertBefore(el,mk);
 var css=".live{margin-top:18px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);padding:14px 18px;box-shadow:var(--shadow)}"+
 ".live-h{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin-bottom:10px;font-size:12px;color:var(--ink-3)}"+
@@ -24,8 +24,8 @@ function f(n,d){return n.toLocaleString("tr-TR",{minimumFractionDigits:d,maximum
 function item(k,v,c,n){return '<div class="live-i"><div class="k">'+k+'</div><div class="v">'+v+'</div>'+(c==null?(n?'<div class="c n">'+n+'</div>':''):'<div class="c '+(c>=0?'up':'dn')+'">'+(c>=0?'+':'')+f(c,2)+'% · 24 saat</div>')+'</div>'}
 fetch("/api/live").then(function(r){return r.ok?r.json():Promise.reject()}).then(function(d){
 var h=[];
-if(d.usd)h.push(item("Dolar / TL",f(d.usd,4)+" ₺"));
-if(d.eur)h.push(item("Euro / TL",f(d.eur,4)+" ₺"));
+if(d.usd)h.push(item("Dolar / TL",f(d.usd,2)+" ₺"));
+if(d.eur)h.push(item("Euro / TL",f(d.eur,2)+" ₺"));
 if(d.gold)h.push(item("Gram altın (yaklaşık)",f(d.gold,0)+" ₺",d.goldChg));
 if(d.btc)h.push(item("Bitcoin",f(d.btc,0)+" ₺",d.btcChg));
 var e=d.evds||{};function dd(x){return x&&x.d?" · "+x.d.split("-").slice(0,2).join("."):""}
