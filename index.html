@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="ATLAS prototipi: yatırımları karşılaştırın, 12 aylık olasılıkları ve dünyadaki gelişmeleri keşfedin. Tüm veriler simüledir; yatırım tavsiyesi değildir.">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0;font-size:14px}
+img{max-width:100%}
+[hidden]{display:none!important}
+</style>
+<title>ATLAS</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#ana" aria-label="ATLAS ana sayfa"><span class="brand-mark" aria-hidden="true"></span>ATLAS</a>
+    <nav class="nav" aria-label="Ana menü">
+      <a href="#ana" data-view="ana"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg>Ana Sayfa</a>
+      <a href="#karsilastir" data-view="karsilastir"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V9M10 19V5M16 19v-7M22 19H2"/></svg><span class="lg" data-short="Karşılaştır">Yatırımları Karşılaştır</span></a>
+      <a href="#tahmin" data-view="tahmin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 3 8-8"/><path d="M15 7h5v5"/></svg><span class="lg" data-short="Tahminler">Gelecek Tahminleri</span></a>
+      <a href="#harita" data-view="harita"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg><span class="lg" data-short="Harita">Dünya Haritası</span></a>
+    </nav>
+    <div class="top-right">
+      <span class="proto" data-tip="Bu bir prototiptir. Gösterilen tüm fiyatlar, haberler ve tahminler örnek amaçlı üretilmiş simüle verilerdir.">Prototip · simüle veri</span>
+      <button class="icon-btn" id="themeBtn" aria-label="Koyu / açık tema"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path id="themeIco" d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- ================= ANA SAYFA ================= -->
+<section class="view" id="v-ana" data-view="ana">
+  <div class="wrap">
+    <div class="hero">
+      <h1>Yatırımlarınızı daha iyi <span>anlayın.</span></h1>
+      <p class="sub">Geçmiş performansları karşılaştırın, geleceğe dair olasılıkları keşfedin ve dünyadaki gelişmeleri takip edin.</p>
+      <div class="hero-meta"><span class="sim">Simüle veri</span><span class="note" id="asOf"></span></div>
+    </div>
+    <div class="markets" id="markets"></div>
+
+    <div class="section">
+      <div class="sec-head">
+        <div><span class="eyebrow">Geçmiş performans</span><h2 class="h-sec">Son 5 yılda hangisi daha çok kazandırdı?</h2></div>
+        <a class="link-more" href="#karsilastir">Ayrıntılı karşılaştır →</a>
+      </div>
+      <div class="card big-chart">
+        <div class="bc-controls">
+          <div class="chips" id="homeChips"></div>
+          <div class="seg" id="homeCur" role="group" aria-label="Para birimi"></div>
+        </div>
+        <p class="bc-title" id="homeChartTitle"></p>
+        <div class="chart" id="homeChart"></div>
+        <div class="bc-foot"><p class="insight" id="homeInsight"></p><span class="sim">Simüle veri</span></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="sec-head">
+        <div><span class="eyebrow">Olasılıklar</span><h2 class="h-sec">Önümüzdeki 12 ayda neler olabilir?</h2><p class="sub">Beklenen değişim ve olası en iyi ve en kötü durumlar. Bunlar tahmindir, kesin sonuç değildir.</p></div>
+        <a class="link-more" href="#tahmin">Tüm tahminler →</a>
+      </div>
+      <div class="fc-grid" id="homeFc"></div>
+    </div>
+
+    <div class="section">
+      <div class="sec-head">
+        <div><span class="eyebrow">Gündem</span><h2 class="h-sec">Dünyada piyasaları etkileyen gelişmeler</h2></div>
+        <a class="link-more" href="#harita">Haritada keşfet →</a>
+      </div>
+      <div class="world">
+        <div class="globe-prev" id="homeGlobeWrap">
+          <div class="gcanvas" id="homeGlobe"></div>
+          <div class="cap"><div><div class="t">Bugün dünyada neler oluyor?</div><div class="s">Parlayan noktalara dokunun</div></div><a class="btn" href="#harita">Haritayı aç</a></div>
+        </div>
+        <div class="news" id="homeNews"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= KARŞILAŞTIR ================= -->
+<section class="view" id="v-karsilastir" data-view="karsilastir" hidden>
+  <div class="wrap">
+    <div class="page-head">
+      <h1>Yatırımları karşılaştır</h1>
+      <p class="sub">Seçtiğiniz yatırımlara aynı gün aynı parayı yatırsaydınız bugün ne kadarınız olurdu?</p>
+    </div>
+    <div class="card controls">
+      <div class="ctl">
+        <div class="ctl-l"><span class="n">1</span>Ne karşılaştırmak istiyorsun?</div>
+        <div class="chips" id="cmpChips"></div>
+        <div class="subrow"><span class="subrow-l">Faiz / Mevduat</span><div class="chips" id="cmpDepChips"></div></div>
+      </div>
+      <div class="ctl-row">
+        <div class="ctl">
+          <div class="ctl-l"><span class="n">2</span>Hangi para biriminde, ne kadar?</div>
+          <div class="seg" id="cmpCur" role="group" aria-label="Para birimi"></div>
+          <label class="amt" for="cmpAmt"><input type="number" id="cmpAmt" min="1" step="1000" value="100000" inputmode="decimal" aria-label="Başlangıç tutarı"><span id="cmpAmtUnit">₺</span></label>
+        </div>
+        <div class="ctl">
+          <div class="ctl-l"><span class="n">3</span>Hangi dönem?</div>
+          <div class="seg" id="cmpPer" role="group" aria-label="Dönem"></div>
+          <div class="custom" id="cmpCustom" hidden>
+            <label for="cmpFrom">Başlangıç</label><input type="month" id="cmpFrom" min="2019-11" max="2026-09">
+            <label for="cmpTo">Bitiş</label><input type="month" id="cmpTo" min="2019-12" max="2026-10">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card cmp-chart">
+      <h2 class="cmp-title" id="cmpTitle"></h2>
+      <p class="note" id="cmpSubtitle" style="margin:4px 0 10px"></p>
+      <div class="chart" id="cmpChart"></div>
+      <div class="rank" id="cmpRank"></div>
+    </div>
+
+    <div class="card summary">
+      <span class="eyebrow">Kısaca</span>
+      <p class="insight" id="cmpInsight"></p>
+      <p class="note" id="cmpInsight2"></p>
+      <div><span class="sim">Simüle veriyle hesaplandı</span></div>
+    </div>
+
+    <section class="card calc" id="hesap" aria-labelledby="calcTitle">
+      <div class="calc-h"><span class="eyebrow">Faiz hesaplayıcı</span><h2 class="h-sec" id="calcTitle">Paramı Faize Yatırsaydım?</h2><p class="sub">Tutarı, vadeyi ve faizi seçin; stopaj sonrası ne kazanacağınızı hemen görün.</p></div>
+      <div class="calc-body"><div class="calc-form" id="calcForm"></div><div class="calc-out" id="calcOut" aria-live="polite"></div></div>
+    </section>
+
+    <details class="card adv" id="cmpAdv">
+      <summary><div>Detaylı Analiz<small>Yıllık ortalama getiri, dalgalanma, en büyük düşüş ve enflasyon etkisi</small></div><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="adv-body">
+        <div class="metrics" id="cmpMetrics"></div>
+        <div class="dep-detail" id="cmpDep" hidden></div>
+        <div>
+          <p class="adv-h">Zirveden ne kadar düştü?</p>
+          <p class="note" style="margin:2px 0 8px">Her yatırımın o güne kadarki en yüksek değerinden yüzde kaç aşağıda olduğu. Sıfır çizgisi, yeni bir zirve demektir.</p>
+          <div class="chart" id="ddChart"></div>
+        </div>
+        <p class="note" id="cmpMethod"></p>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- ================= TAHMİN ================= -->
+<section class="view" id="v-tahmin" data-view="tahmin" hidden>
+  <div class="wrap">
+    <div class="page-head">
+      <h1>Önümüzdeki 12 ayda ne olabilir?</h1>
+      <p class="sub">Her yatırım için en olası değişimi ve iyi ya da kötü giderse neler olabileceğini görün.</p>
+      <div class="disc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5v.5"/></svg><p>Bu sayfadaki tahminler <b>simüle edilmiştir</b> ve hiçbir sonucu garanti etmez. Gerçek fiyatlar bu aralıkların dışına çıkabilir. Yatırım tavsiyesi değildir.</p></div>
+    </div>
+    <div class="fsel"><p class="ctl-l" style="margin-bottom:10px">Hangi yatırımları görmek istersiniz?</p><div class="chips" id="fcChips"></div>
+      <div class="subrow"><span class="subrow-l">Faiz / Mevduat</span><div class="chips" id="fcDepChips"></div></div></div>
+    <div class="fdc" id="fcDepCtl"><label for="fcAmt">Faiz hesapları için tutar <input type="number" id="fcAmt" min="1" step="1000" value="100000" inputmode="decimal"> ₺</label>
+      <label for="fcFixed"><input type="checkbox" id="fcFixed"> Sabit faiz senaryosunu da göster</label></div>
+    <div class="flist" id="fcList"></div>
+    <details class="card adv" style="margin-top:22px">
+      <summary><div>Tahminler nasıl hesaplanıyor?<small>Yöntem, varsayımlar ve sınırlamalar</small></div><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="adv-body" id="fcMethod"></div>
+    </details>
+  </div>
+</section>
+
+<!-- ================= DÜNYA HARİTASI ================= -->
+<section class="view gpage" id="v-harita" data-view="harita" hidden>
+  <div class="wrap">
+    <div class="gbar">
+      <div><h1>Dünya Haritası</h1><p class="sub">Piyasaları etkileyebilecek gelişmeleri keşfedin.</p></div>
+      <div class="gfil">
+        <div class="seg" id="gTime" role="group" aria-label="Zaman aralığı"></div>
+        <input type="date" id="gDate" hidden aria-label="Tarih seç" min="2026-09-01" max="2026-10-20">
+      </div>
+    </div>
+    <div class="chips" id="gAssets" style="margin-bottom:14px"></div>
+    <div class="gstage" id="gStage">
+      <div class="gcanvas" id="bigGlobe"></div>
+      <div class="gcount" id="gCount"></div>
+      <div class="zoom"><button id="zIn" aria-label="Yakınlaştır">+</button><button id="zOut" aria-label="Uzaklaştır">−</button></div>
+      <div class="ghint">Sürükleyerek çevirin · Kaydırarak yakınlaştırın</div>
+      <div class="ghover" id="gHover"></div>
+      <aside class="gpanel" aria-live="polite"><div class="gpanel-scroll" id="gPanel"></div></aside>
+    </div>
+  </div>
+</section>
+
+<div class="wrap foot" id="foot">
+  <p>ATLAS bir prototiptir. Bu sayfadaki tüm fiyatlar, haberler ve tahminler simüle edilmiştir; gerçek piyasa verisi değildir ve yatırım tavsiyesi niteliği taşımaz.</p>
+  <span>Veri tarihi: 20 Ekim 2026</span>
+</div>
+</main>
+<div id="tip" role="tooltip"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
+<script src="texgen.js"></script>
+<script src="a1.js"></script>
+<script src="a2.js"></script>
+<script src="a3.js"></script>
+<script src="a4.js"></script>
+<script src="a5.js"></script>
+<script src="a6.js"></script>
+
+</body>
+</html>
