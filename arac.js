@@ -49,6 +49,9 @@
     ".seg-b{font:inherit;font-size:13px;font-weight:600;border:0;background:transparent;color:var(--ink-2);padding:6px 12px;border-radius:999px;cursor:pointer}.seg-b[aria-pressed=true]{background:var(--surface);color:var(--ink);box-shadow:var(--shadow)}" +
     ".ad-tw{overflow-x:auto;margin:0 -4px}.ad-t{width:100%;border-collapse:collapse;font-size:13.5px;min-width:640px}.ad-t th{text-align:left;font-size:12px;color:var(--ink-3);font-weight:600;padding:8px 6px;border-bottom:1px solid var(--line)}" +
     ".ad-t th button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}.ad-t td{padding:10px 6px;border-bottom:1px solid var(--line);vertical-align:top;font-variant-numeric:tabular-nums}.ad-t td small{display:block;font-size:11.5px;color:var(--ink-3)}.ad-t .r{text-align:right}.ad-t a{text-decoration:none;font-weight:600;white-space:nowrap}" +
+    ".ad-more{display:block;width:100%;margin-top:10px;font:inherit;font-size:14px;font-weight:600;color:var(--accent);background:var(--surface-2);border:0;border-radius:10px;padding:10px;cursor:pointer}" +
+    ".ad-q{font:inherit;font-size:14px;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);min-width:200px}" +
+    "@media (max-width:760px){.ad-q{width:100%;min-width:0}}" +
     ".ad-wait h3{margin:0 0 6px;font-size:16px}.ad-wait p{margin:0;font-size:13.5px;color:var(--ink-2)}" +
     "@media (max-width:1000px){.ad-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.ad-grid{grid-template-columns:1fr}}" +
     "@media (max-width:760px){.ad-k .v{font-size:19px}.ad-card{padding:16px}}" +
@@ -75,7 +78,7 @@
   }
 
   var SEGC = { A: "var(--s-euro)", B: "var(--s-altin)", C: "var(--s-dolar)", SUV: "var(--s-borsa)", D: "var(--s-bitcoin)", E: "var(--s-konut)" };
-  var sort = "asc", trend = "tr", tsort = { k: "price", dir: 1 };
+  var more = false, sort = "asc", trend = "tr", tsort = { k: "price", dir: 1 };
   function rows() {
     var S = D.sifir, ms = S.months, cur = ms[ms.length - 1], prev = ms[ms.length - 2], out = [];
     S.segments.forEach(function (s) {
@@ -104,7 +107,8 @@
   function bars(R) {
     var S = D.sifir, cur = S.months[S.months.length - 1];
     var list = R.filter(seg_).sort(function (a, b) { return sort === "desc" ? b.price - a.price : sort === "disc" ? b.disc - a.disc : a.eff - b.eff; });
-    var max = Math.max.apply(null, list.map(function (r) { return r.price; }));
+    var max = Math.max.apply(null, list.map(function (r) { return r.price; })), total = list.length;
+    if (!more && total > 12) list = list.slice(0, 12);
     var tabs = [["all", "Tümü"]].concat(S.segments.map(function (s) { return [s.id, s.id === "SUV" ? "SUV" : s.id + " sınıfı"]; }));
     return '<div class="card ad-card ad-bars"><div class="ad-h"><div><h3>Sıfır araç fiyatları</h3><p>' + ay(cur) + ", en uygun donanımın başlangıç fiyatı</p></div>" +
       '<label class="ad-sel"><span>Sırala</span><select id="adSort"><option value="asc"' + (sort === "asc" ? " selected" : "") + '>En ucuzdan</option><option value="desc"' + (sort === "desc" ? " selected" : "") + '>En pahalıdan</option><option value="disc"' + (sort === "disc" ? " selected" : "") + ">En büyük kampanya</option></select></label></div>" +
@@ -115,7 +119,7 @@
           '<div class="tr">' + esc(r.trim) + "</div>" +
           '<div class="bar"><span class="l" style="width:' + (r.price / max * 100).toFixed(1) + '%"></span>' + (r.deal ? '<span class="d" style="width:' + (r.deal / max * 100).toFixed(1) + '%;background:' + SEGC[r.seg] + '"></span>' : '<span class="d" style="width:' + (r.price / max * 100).toFixed(1) + '%;background:' + SEGC[r.seg] + '"></span>') + "</div>" +
           '<div class="val"><b>' + tl(r.eff) + "</b>" + (r.deal ? '<s>' + tl(r.price) + "</s>" : "") + "</div></div>";
-      }).join("") + "</div>";
+      }).join("") + (total > 12 ? '<button type="button" class="ad-more" data-more="1">' + (more ? "Daha az göster" : "Tümünü göster (" + total + " model)") + "</button>" : "") + "</div>";
   }
 
   function segSummary(R) {
@@ -147,7 +151,7 @@
   function table(R) {
     var list = R.filter(seg_).sort(function (a, b) { var k = tsort.k, x = a[k], y = b[k]; if (x == null) x = -1e12; if (y == null) y = -1e12; return (typeof x === "string" ? x.localeCompare(y, "tr") : x - y) * tsort.dir; });
     var th = function (k, t, c) { return '<th class="' + (c || "") + '"><button type="button" data-tsort="' + k + '">' + t + (tsort.k === k ? (tsort.dir > 0 ? " ▲" : " ▼") : "") + "</button></th>"; };
-    return '<div class="card ad-card"><div class="ad-h"><div><h3>Tüm modeller</h3><p>Sütun başlığına dokunarak sıralayın</p></div></div><div class="ad-tw"><table class="ad-t"><thead><tr>' +
+    return '<div class="card ad-card"><div class="ad-h"><div><h3>Tüm modeller</h3><p>Sütun başlığına dokunarak sıralayın</p></div><input type="search" id="adQ" class="ad-q" placeholder="Model ara" aria-label="Model ara"></div><div class="ad-tw"><table class="ad-t"><thead><tr>' +
       th("name", "Model") + th("seg", "Sınıf") + th("price", "Liste", "r") + th("deal", "Kampanyalı", "r") + th("disc", "İndirim", "r") + th("chg", "Aylık", "r") + "<th>Kaynak</th></tr></thead><tbody>" +
       list.map(function (r) {
         return "<tr><td><b>" + esc(r.name) + "</b><small>" + esc(r.trim) + (r.note ? " · " + esc(r.note) : "") + "</small></td><td>" + badge(r.seg) + esc(r.seg) + '</td><td class="r">' + tl(r.price) + '</td><td class="r">' + (r.deal ? tl(r.deal) : "–") + '</td><td class="r ' + (r.disc ? "up" : "") + '">' + (r.disc ? "%" + new Intl.NumberFormat("tr-TR", { maximumFractionDigits: 1 }).format(r.disc * 100) : "–") + '</td><td class="r ' + (r.chg == null ? "" : cls(r.chg)) + '">' + (r.chg == null ? "yeni" : Math.abs(r.chg) < 0.0005 ? "0" : pc(r.chg)) + "</td><td>" + (r.src ? '<a href="' + esc(r.src[1]) + '" target="_blank" rel="noopener">' + esc(r.src[0]) + " ↗</a>" : "") + "</td></tr>";
@@ -169,9 +173,15 @@
     body.innerHTML = kpis(R) + '<div class="ad-grid">' + bars(R) + '<div class="ad-side">' + segSummary(R) + antalya() + "</div></div>" + trendCard() + table(R) + '<p class="note">Bu sayfadaki fiyatlar bilgilendirme amaçlıdır, yatırım tavsiyesi değildir. Son güncelleme: ' + esc(D.updated.split("-").reverse().join(".")) + ".</p>";
   }
   body.addEventListener("click", function (e) {
-    var b = e.target.closest("[data-arseg]"); if (b) { seg = b.getAttribute("data-arseg"); return render(); }
+    var b = e.target.closest("[data-arseg]"); if (b) { seg = b.getAttribute("data-arseg"); more = false; return render(); }
+    if (e.target.closest("[data-more]")) { more = !more; return render(); }
     var t = e.target.closest("[data-trend]"); if (t) { trend = t.getAttribute("data-trend"); return render(); }
     var h = e.target.closest("[data-tsort]"); if (h) { var k = h.getAttribute("data-tsort"); tsort = { k: k, dir: tsort.k === k ? -tsort.dir : (k === "disc" || k === "chg" ? -1 : 1) }; return render(); }
+  });
+  body.addEventListener("input", function (e) {
+    if (e.target.id !== "adQ") return;
+    var q = e.target.value.toLocaleLowerCase("tr");
+    body.querySelectorAll(".ad-t tbody tr").forEach(function (tr) { tr.hidden = q && tr.textContent.toLocaleLowerCase("tr").indexOf(q) < 0; });
   });
   body.addEventListener("change", function (e) { if (e.target.id === "adSort") { sort = e.target.value; render(); } });
 

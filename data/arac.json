@@ -25,6 +25,32 @@
        "Kia",
        "https://www.kia.com/tr/satis-merkezi/fiyat-listesi.html"
       ]
+     },
+     {
+      "name": "Hyundai Inster",
+      "trim": "71,1 kW Dynamic (elektrikli)",
+      "list": {
+       "2026-10": 1670000
+      },
+      "deal": {
+       "2026-10": 1520000
+      },
+      "src": [
+       "Hyundai",
+       "https://www.hyundai.com/tr/tr/satis/fiyat-listesi.html"
+      ]
+     },
+     {
+      "name": "Fiat 500e",
+      "trim": "Giorgio Armani 42 kWh (elektrikli)",
+      "list": {
+       "2026-10": 2379900
+      },
+      "deal": {},
+      "src": [
+       "Fiat",
+       "https://talep.fiat.com.tr/fiyat-listesi/Binek-Ara%C3%A7-Fiyat-Listesi"
+      ]
      }
     ]
    },
@@ -50,6 +76,34 @@
       ]
      },
      {
+      "name": "Dacia Logan",
+      "trim": "essential TCe 100",
+      "list": {
+       "2026-10": 1470000
+      },
+      "deal": {
+       "2026-10": 1328000
+      },
+      "src": [
+       "Dacia",
+       "https://best.renault.com.tr/dacia/fiyat-listesi/?kat=all"
+      ]
+     },
+     {
+      "name": "Opel Corsa",
+      "trim": "1.2 100 HP MT6 Edition",
+      "list": {
+       "2026-10": 1535000
+      },
+      "deal": {
+       "2026-10": 1335000
+      },
+      "src": [
+       "Opel",
+       "https://fiyatlisteleri.opel.com.tr/tum-araclar"
+      ]
+     },
+     {
       "name": "Hyundai i20",
       "trim": "1.0 T-GDI 90 PS Jump",
       "list": {
@@ -66,6 +120,32 @@
       ]
      },
      {
+      "name": "Citroën ë-C3",
+      "trim": "83 kW Plus (elektrikli)",
+      "list": {
+       "2026-10": 1645000
+      },
+      "deal": {},
+      "src": [
+       "Citroën",
+       "https://talep.citroen.com.tr/fiyat-listesi/"
+      ]
+     },
+     {
+      "name": "Fiat Grande Panda",
+      "trim": "La Prima 44 kWh (elektrikli)",
+      "list": {
+       "2026-10": 1684900
+      },
+      "deal": {
+       "2026-10": 1584900
+      },
+      "src": [
+       "Fiat",
+       "https://talep.fiat.com.tr/fiyat-listesi/Binek-Ara%C3%A7-Fiyat-Listesi"
+      ]
+     },
+     {
       "name": "Renault Clio",
       "trim": "evolution plus TCe EDC 115",
       "list": {
@@ -76,6 +156,70 @@
       "src": [
        "Renault",
        "https://best.renault.com.tr/fiyat-listesi/?kat=Binek"
+      ]
+     },
+     {
+      "name": "SEAT Ibiza",
+      "trim": "1.0 TSI 116 PS DSG Style Plus",
+      "list": {
+       "2026-10": 1985000
+      },
+      "deal": {},
+      "src": [
+       "araclo (SEAT)",
+       "https://www.araclo.com/sifir-arac-fiyatlari/ekim-2026-b-segmenti-sifir-arac-fiyatlari"
+      ]
+     },
+     {
+      "name": "Škoda Fabia",
+      "trim": "Premium 1.0 TSI 115 PS DSG",
+      "list": {
+       "2026-10": 2009900
+      },
+      "deal": {
+       "2026-10": 1877900
+      },
+      "src": [
+       "Škoda",
+       "https://www.skoda.com.tr/fiyat-listesi"
+      ]
+     },
+     {
+      "name": "Peugeot e-208",
+      "trim": "GT 100 kW (elektrikli)",
+      "list": {
+       "2026-10": 2080000
+      },
+      "deal": {},
+      "src": [
+       "Peugeot",
+       "https://kampanya.peugeot.com.tr/fiyat-listesi/"
+      ]
+     },
+     {
+      "name": "Renault 5 E-Tech",
+      "trim": "Techno EV52 150 hp (elektrikli)",
+      "list": {
+       "2026-10": 2140000
+      },
+      "deal": {},
+      "src": [
+       "Renault",
+       "https://best.renault.com.tr/fiyat-listesi/?kat=Binek"
+      ]
+     },
+     {
+      "name": "Toyota Yaris",
+      "trim": "1.5 Hybrid Flame e-CVT",
+      "list": {
+       "2026-10": 2521000
+      },
+      "deal": {
+       "2026-10": 2080000
+      },
+      "src": [
+       "Toyota",
+       "https://turkiye.toyota.com.tr/middle/fiyat-listesi/"
       ]
      }
     ]
@@ -115,6 +259,92 @@
       ]
      },
      {
+      "name": "Togg T10F",
+      "trim": "V1 RWD Standart Menzil (elektrikli)",
+      "list": {
+       "2026-10": 1884980
+      },
+      "deal": {},
+      "src": [
+       "Togg",
+       "https://www.togg.com.tr/tr/price-list"
+      ]
+     },
+     {
+      "name": "Kia XCeed",
+      "trim": "1.0L 115 PS DCT Cool",
+      "list": {
+       "2026-10": 1960000
+      },
+      "deal": {},
+      "src": [
+       "Kia",
+       "https://www.kia.com/tr/satis-merkezi/fiyat-listesi.html"
+      ]
+     },
+     {
+      "name": "Hyundai i30",
+      "trim": "1.6 T-GDI 150 PS DCT Comfort",
+      "list": {
+       "2026-10": 2120000
+      },
+      "deal": {},
+      "src": [
+       "Hyundai",
+       "https://www.hyundai.com/tr/tr/satis/fiyat-listesi.html"
+      ]
+     },
+     {
+      "name": "Citroën C4",
+      "trim": "1.2 Hybrid 145 eDCS6 You",
+      "list": {
+       "2026-10": 2295000
+      },
+      "deal": {
+       "2026-10": 2140000
+      },
+      "src": [
+       "Citroën",
+       "https://talep.citroen.com.tr/fiyat-listesi/"
+      ]
+     },
+     {
+      "name": "Opel Astra",
+      "trim": "1.5 130 HP Dizel AT8 Edition",
+      "list": {
+       "2026-10": 2330000
+      },
+      "deal": {},
+      "src": [
+       "Opel",
+       "https://fiyatlisteleri.opel.com.tr/tum-araclar"
+      ]
+     },
+     {
+      "name": "Peugeot 308",
+      "trim": "Allure 1.5 BlueHDi 130 hp EAT8",
+      "list": {
+       "2026-10": 2360000
+      },
+      "deal": {},
+      "src": [
+       "Peugeot",
+       "https://kampanya.peugeot.com.tr/fiyat-listesi/"
+      ]
+     },
+     {
+      "name": "Volkswagen Golf",
+      "trim": "1.5 TSI 116 PS Manuel Impression",
+      "list": {
+       "2026-10": 2390000
+      },
+      "deal": {},
+      "src": [
+       "Volkswagen",
+       "https://binekarac.vw.com.tr/tr/modeller-fiyatlar/volkswagen-fiyat-listesi.html"
+      ]
+     },
+     {
       "name": "Toyota Corolla",
       "trim": "1.5 Vision Plus Multidrive S",
       "list": {
@@ -129,13 +359,79 @@
        "Toyota",
        "https://turkiye.toyota.com.tr/middle/fiyat-listesi/"
       ]
+     },
+     {
+      "name": "SEAT Leon",
+      "trim": "1.5 eTSI 116 PS DSG Style",
+      "list": {
+       "2026-10": 2560000
+      },
+      "deal": {},
+      "src": [
+       "araclo (SEAT)",
+       "https://www.araclo.com/sifir-arac-fiyatlari/ekim-2026-c-segmenti-sifir-arac-fiyatlari"
+      ]
+     },
+     {
+      "name": "Peugeot 408",
+      "trim": "Allure 1.2 Hybrid 145 hp eDCS6",
+      "list": {
+       "2026-10": 2685000
+      },
+      "deal": {
+       "2026-10": 2370000
+      },
+      "src": [
+       "Peugeot",
+       "https://kampanya.peugeot.com.tr/fiyat-listesi/"
+      ]
+     },
+     {
+      "name": "Ford Focus",
+      "trim": "Titanium Stil Sedan 1.5L EcoBlue 115 PS",
+      "list": {
+       "2026-10": 2720500
+      },
+      "deal": {},
+      "src": [
+       "araclo (Ford)",
+       "https://www.araclo.com/sifir-arac-fiyatlari/ekim-2026-c-segmenti-sifir-arac-fiyatlari"
+      ]
+     },
+     {
+      "name": "Škoda Octavia",
+      "trim": "Elite 1.5 TSI mHEV 150 PS DSG",
+      "list": {
+       "2026-10": 2779900
+      },
+      "deal": {
+       "2026-10": 2385500
+      },
+      "src": [
+       "Škoda",
+       "https://www.skoda.com.tr/fiyat-listesi"
+      ]
+     },
+     {
+      "name": "Toyota Corolla Hatchback",
+      "trim": "1.8 Hybrid Flame e-CVT",
+      "list": {
+       "2026-10": 2960000
+      },
+      "deal": {
+       "2026-10": 2230000
+      },
+      "src": [
+       "Toyota",
+       "https://turkiye.toyota.com.tr/middle/fiyat-listesi/"
+      ]
      }
     ]
    },
    {
     "id": "SUV",
     "name": "SUV",
-    "desc": "Kompakt SUV",
+    "desc": "Küçük ve kompakt SUV",
     "models": [
      {
       "name": "Renault Duster",
@@ -164,6 +460,32 @@
       ]
      },
      {
+      "name": "Opel Mokka",
+      "trim": "1.2 136 HP MT6 Edition",
+      "list": {
+       "2026-10": 1990000
+      },
+      "deal": {
+       "2026-10": 1572000
+      },
+      "src": [
+       "Opel",
+       "https://fiyatlisteleri.opel.com.tr/tum-araclar"
+      ]
+     },
+     {
+      "name": "Ford Puma",
+      "trim": "ST-Line Black Edition (hibrit)",
+      "list": {
+       "2026-10": 1998700
+      },
+      "deal": {},
+      "src": [
+       "araclo (Ford)",
+       "https://www.araclo.com/sifir-arac-fiyatlari/ekim-2026-b-segmenti-sifir-arac-fiyatlari"
+      ]
+     },
+     {
       "name": "Kia Sportage",
       "trim": "1.6L 150 PS DCT Live",
       "list": {
@@ -177,6 +499,97 @@
       "src": [
        "Kia",
        "https://www.kia.com/tr/satis-merkezi/fiyat-listesi.html"
+      ]
+     },
+     {
+      "name": "Ford Kuga",
+      "trim": "Titanium 1.5L EcoBoost 186 PS",
+      "list": {
+       "2026-10": 2283200
+      },
+      "deal": {},
+      "src": [
+       "araclo (Ford)",
+       "https://www.araclo.com/sifir-arac-fiyatlari/ekim-2026-c-segmenti-sifir-arac-fiyatlari"
+      ],
+      "note": "2025 model yılı"
+     },
+     {
+      "name": "Renault Captur",
+      "trim": "Techno mild hybrid EDC 140 hp",
+      "list": {
+       "2026-10": 2325000
+      },
+      "deal": {},
+      "src": [
+       "Renault",
+       "https://best.renault.com.tr/fiyat-listesi/?kat=Binek"
+      ]
+     },
+     {
+      "name": "Peugeot 2008",
+      "trim": "Allure 1.2 Hybrid 145 hp eDCS6",
+      "list": {
+       "2026-10": 2353000
+      },
+      "deal": {},
+      "src": [
+       "Peugeot",
+       "https://kampanya.peugeot.com.tr/fiyat-listesi/"
+      ]
+     },
+     {
+      "name": "Hyundai Kona",
+      "trim": "1.6 T-GDI 180 PS DCT Prime",
+      "list": {
+       "2026-10": 2366000
+      },
+      "deal": {
+       "2026-10": 2295000
+      },
+      "src": [
+       "Hyundai",
+       "https://www.hyundai.com/tr/tr/satis/fiyat-listesi.html"
+      ]
+     },
+     {
+      "name": "Renault Boreal",
+      "trim": "evolution TCe EDC 145 hp",
+      "list": {
+       "2026-10": 2379000
+      },
+      "deal": {
+       "2026-10": 2269000
+      },
+      "src": [
+       "Renault",
+       "https://best.renault.com.tr/fiyat-listesi/?kat=Binek"
+      ]
+     },
+     {
+      "name": "Hyundai Tucson",
+      "trim": "1.6 T-GDI 180 PS 4x2 DCT Comfort",
+      "list": {
+       "2026-10": 2599000
+      },
+      "deal": {},
+      "src": [
+       "Hyundai",
+       "https://www.hyundai.com/tr/tr/satis/fiyat-listesi.html"
+      ]
+     },
+     {
+      "name": "MG ZS",
+      "trim": "Hybrid+ Luxury",
+      "list": {
+       "2026-10": 2685000
+      },
+      "deal": {
+       "2026-10": 2349000
+      },
+      "src": [
+       "araclo (MG)",
+       "https://www.araclo.com/sifir-arac-fiyatlari/ekim-2026-b-segmenti-sifir-arac-fiyatlari"
       ]
      },
      {
@@ -195,6 +608,85 @@
       ]
      },
      {
+      "name": "Toyota C-HR",
+      "trim": "1.8 Hybrid Flame e-CVT",
+      "list": {
+       "2026-10": 2859000
+      },
+      "deal": {
+       "2026-10": 2400000
+      },
+      "src": [
+       "Toyota",
+       "https://turkiye.toyota.com.tr/middle/fiyat-listesi/"
+      ]
+     },
+     {
+      "name": "CUPRA Formentor",
+      "trim": "1.5 eTSI 150 PS DSG Impulse (2026)",
+      "list": {
+       "2026-09": 2860000,
+       "2026-10": 2860000
+      },
+      "deal": {},
+      "src": [
+       "CUPRA",
+       "https://www.cupraofficial.com.tr/cupra-sahipleri/fiyat-listesi"
+      ]
+     },
+     {
+      "name": "Citroën C5 Aircross",
+      "trim": "1.2 Hybrid 145 eDCS6 Plus",
+      "list": {
+       "2026-10": 2865000
+      },
+      "deal": {
+       "2026-10": 2399000
+      },
+      "src": [
+       "Citroën",
+       "https://talep.citroen.com.tr/fiyat-listesi/"
+      ]
+     },
+     {
+      "name": "Toyota Yaris Cross",
+      "trim": "1.5 Hybrid Flame e-CVT",
+      "list": {
+       "2026-10": 2868000
+      },
+      "deal": {
+       "2026-10": 2388000
+      },
+      "src": [
+       "Toyota",
+       "https://turkiye.toyota.com.tr/middle/fiyat-listesi/"
+      ]
+     },
+     {
+      "name": "Renault Austral",
+      "trim": "techno mild hybrid 150 hp",
+      "list": {
+       "2026-10": 2900000
+      },
+      "deal": {},
+      "src": [
+       "Renault",
+       "https://best.renault.com.tr/fiyat-listesi/?kat=Binek"
+      ]
+     },
+     {
+      "name": "Volkswagen T-Roc",
+      "trim": "1.5 eTSI 150 PS DSG Life",
+      "list": {
+       "2026-10": 2916000
+      },
+      "deal": {},
+      "src": [
+       "Volkswagen",
+       "https://binekarac.vw.com.tr/tr/modeller-fiyatlar/volkswagen-fiyat-listesi.html"
+      ]
+     },
+     {
       "name": "Peugeot 3008",
       "trim": "Allure 1.2 Hybrid 145 hp eDCS6",
       "list": {
@@ -210,16 +702,29 @@
       ]
      },
      {
-      "name": "CUPRA Formentor",
-      "trim": "1.5 eTSI 150 PS DSG Impulse (2026)",
+      "name": "Toyota Corolla Cross",
+      "trim": "1.8 Hybrid Flame e-CVT",
       "list": {
-       "2026-09": 2860000,
-       "2026-10": 2860000
+       "2026-10": 3413000
+      },
+      "deal": {
+       "2026-10": 2899000
+      },
+      "src": [
+       "Toyota",
+       "https://turkiye.toyota.com.tr/middle/fiyat-listesi/"
+      ]
+     },
+     {
+      "name": "Volkswagen Tiguan",
+      "trim": "Life 1.5 eTSI 150 PS DSG",
+      "list": {
+       "2026-10": 3600000
       },
       "deal": {},
       "src": [
-       "CUPRA",
-       "https://www.cupraofficial.com.tr/cupra-sahipleri/fiyat-listesi"
+       "Volkswagen",
+       "https://binekarac.vw.com.tr/tr/modeller-fiyatlar/volkswagen-fiyat-listesi.html"
       ]
      }
     ]
@@ -227,8 +732,59 @@
    {
     "id": "D",
     "name": "D segmenti",
-    "desc": "Üst orta sınıf",
+    "desc": "Üst orta sınıf sedan ve SUV",
     "models": [
+     {
+      "name": "MG7",
+      "trim": "Excellence 170 HP",
+      "list": {
+       "2026-10": 3110000
+      },
+      "deal": {
+       "2026-10": 2960000
+      },
+      "src": [
+       "araclo (MG)",
+       "https://www.araclo.com/sifir-arac-fiyatlari/ekim-2026-d-segmenti-sifir-arac-fiyatlari"
+      ]
+     },
+     {
+      "name": "Hyundai Ioniq 6",
+      "trim": "125 kW Standart Menzil Advance (elektrikli)",
+      "list": {
+       "2026-10": 3246000
+      },
+      "deal": {},
+      "src": [
+       "Hyundai",
+       "https://www.hyundai.com/tr/tr/satis/fiyat-listesi.html"
+      ]
+     },
+     {
+      "name": "Peugeot 5008",
+      "trim": "Allure 1.2 Hybrid 145 hp eDCS6",
+      "list": {
+       "2026-10": 3426000
+      },
+      "deal": {},
+      "src": [
+       "Peugeot",
+       "https://kampanya.peugeot.com.tr/fiyat-listesi/"
+      ]
+     },
+     {
+      "name": "Volkswagen Tayron",
+      "trim": "1.5 eTSI 150 PS DSG Life",
+      "list": {
+       "2026-10": 3475150
+      },
+      "deal": {},
+      "src": [
+       "Volkswagen",
+       "https://binekarac.vw.com.tr/tr/modeller-fiyatlar/volkswagen-fiyat-listesi.html"
+      ],
+      "note": "2025 model yılı"
+     },
      {
       "name": "Škoda Superb",
       "trim": "Premium 1.5 TSI mHEV 150 PS DSG",
@@ -243,6 +799,18 @@
       ]
      },
      {
+      "name": "Kia EV6",
+      "trim": "125 kW Elegance (elektrikli)",
+      "list": {
+       "2026-10": 3790000
+      },
+      "deal": {},
+      "src": [
+       "Kia",
+       "https://www.kia.com/tr/satis-merkezi/fiyat-listesi.html"
+      ]
+     },
+     {
       "name": "Volkswagen Passat",
       "trim": "1.5 eTSI 150 PS DSG Impression",
       "list": {
@@ -253,6 +821,44 @@
       "src": [
        "Volkswagen",
        "https://binekarac.vw.com.tr/tr/modeller-fiyatlar/volkswagen-fiyat-listesi.html"
+      ]
+     },
+     {
+      "name": "Škoda Kodiaq",
+      "trim": "Premium 1.5 TSI mHEV 150 PS DSG",
+      "list": {
+       "2026-10": 4049900
+      },
+      "deal": {},
+      "src": [
+       "Škoda",
+       "https://www.skoda.com.tr/fiyat-listesi"
+      ]
+     },
+     {
+      "name": "Renault Rafale",
+      "trim": "esprit alpine E-Tech full hybrid 200 hp",
+      "list": {
+       "2026-10": 4050000
+      },
+      "deal": {},
+      "src": [
+       "Renault",
+       "https://best.renault.com.tr/fiyat-listesi/?kat=Binek"
+      ]
+     },
+     {
+      "name": "Nissan X-Trail",
+      "trim": "1.5 VC-T Mild Hybrid 163 PS Platinum",
+      "list": {
+       "2026-10": 5098300
+      },
+      "deal": {
+       "2026-10": 4350000
+      },
+      "src": [
+       "Nissan",
+       "https://www.nissan.com.tr/fiyat-listesi/sifir-arac-fiyatlari-2026.html"
       ]
      }
     ]
