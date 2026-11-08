@@ -14,6 +14,8 @@
     scen: "Kötümser ve iyimser: İşler beklenenden kötü ya da iyi giderse olası değişim. Gerçek sonuç bu aralığın dışına da çıkabilir."
   };
   var q = function (k) { return '<span class="qmark" tabindex="0" role="button" data-tip="' + TIP[k].replace(/"/g, "&quot;") + '">?</span>'; };
+  // Series that real.js replaced with real history (set once /api/history arrives)
+  var isReal = function (k) { return !!(window.ATLAS_REAL && window.ATLAS_REAL.indexOf(k) >= 0); };
   var tag = function (real) { return real ? '<span class="dtag live">canlı veri</span>' : '<span class="dtag">örnek veri</span>'; };
 
   var css =
@@ -58,7 +60,7 @@
     var a = N - 1, y = a - 52;
     document.querySelectorAll("#markets .mcard").forEach(function (c) {
       var k = c.getAttribute("data-asset"), nm = $(".nm", c);
-      if (!$(".dtag", c)) c.insertAdjacentHTML("beforeend", tag(REAL_KEYS.indexOf(k) >= 0));
+      if (!$(".dtag", c)) c.insertAdjacentHTML("beforeend", (REAL_KEYS.indexOf(k) >= 0 ? tag(true) : isReal(k) ? '<span class="dtag live">gerçek veri</span>' : tag(false)));
       if (k === "borsa" && nm && !$(".qmark", nm)) nm.insertAdjacentHTML("beforeend", q("bist"));
       if (k === "otomobil") c.setAttribute("href", "#arac");
       if (!L) return;
@@ -111,8 +113,11 @@
     pop = document.createElement("div"); pop.className = "info-pop"; pop.setAttribute("role", "dialog"); pop.setAttribute("aria-label", "Hangi veriler gerçek?");
     pop.innerHTML = '<button type="button" class="x" aria-label="Kapat">×</button><h3>Hangi veriler gerçek?</h3>' +
       "<h4>Gerçek veriler</h4><ul><li>Canlı piyasa kutusu: dolar, euro, gram altın, Bitcoin, TCMB faizi, mevduat faizi ve enflasyon</li>" +
-      "<li>Dolar, euro, altın ve Bitcoin grafikleri (2019'dan bugüne haftalık)</li><li>Enflasyon (TÜFE) geçmişi ve hesaplayıcılardaki oranlar</li><li>Gündem bölümündeki haber başlıkları</li><li>Araç Fiyatları sayfasındaki sıfır araç ve sahibinden ikinci el fiyatları</li></ul>" +
-      "<h4>Örnek (simüle) veriler</h4><ul><li>Borsa, konut fiyatları ve ana sayfadaki otomobil kartı</li><li>Mevduat faizinin geçmişi</li><li>Gelecek tahminlerinin tamamı</li></ul>" +
+      "<li>Dolar, euro, altın ve Bitcoin grafikleri (2019'dan bugüne haftalık)</li>" +
+      (isReal("konut") ? "<li>Konut: TCMB Konut Fiyat Endeksi (aylık, yaklaşık iki ay gecikmeli yayımlanır)</li>" : "") +
+      (isReal("mevduat") ? "<li>Mevduat faizinin geçmişi (TCMB haftalık ortalama TL mevduat faizleri)</li>" : "") +
+      "<li>Enflasyon (TÜFE) geçmişi ve hesaplayıcılardaki oranlar</li><li>Gündem bölümündeki haber başlıkları</li><li>Araç Fiyatları sayfasındaki sıfır araç ve sahibinden ikinci el fiyatları</li></ul>" +
+      "<h4>Örnek (simüle) veriler</h4><ul><li>Borsa" + (isReal("konut") ? "" : ", konut fiyatları") + " ve ana sayfadaki otomobil kartı</li>" + (isReal("mevduat") ? "" : "<li>Mevduat faizinin geçmişi</li>") + "<li>Gelecek tahminlerinin tamamı</li></ul>" +
       "<p>Kartlardaki <b>canlı</b> ve <b>örnek veri</b> etiketleri bu ayrımı gösterir. ATLAS bir prototiptir; hiçbir bilgi yatırım tavsiyesi değildir.</p>";
     document.body.appendChild(pop);
     var r = btn.getBoundingClientRect();

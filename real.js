@@ -17,9 +17,18 @@
   var REAL = [], H = null, L = null;
   var AY = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"];
   var ayYil = function (d) { var p = d.split("-"); return AY[+p[1] - 1] + " " + p[0]; };
+  window.ATLAS_REAL = REAL;
+  var has = function (k) { return REAL.indexOf(k) >= 0; };
+  // "Borsa, konut, otomobil ve mevduat" minus the series that came in as real data
+  var simWords = function () {
+    var w = ["borsa"].concat(has("konut") ? [] : ["konut"], ["otomobil"], has("mevduat") ? [] : ["mevduat geçmişi"]);
+    return w.length > 1 ? w.slice(0, -1).join(", ") + " ve " + w[w.length - 1] : w[0];
+  };
+  var realWords = function () { return "döviz, altın, Bitcoin" + (has("konut") ? ", konut" : "") + (has("mevduat") ? ", mevduat faizi" : "") + " ve enflasyon geçmişi"; };
+  var cap = function (t) { return t.charAt(0).toLocaleUpperCase("tr-TR") + t.slice(1); };
   var SIM_TIP = function () {
     return REAL.length
-      ? "Döviz, altın, Bitcoin ve enflasyon geçmişi gerçek veridir (TCMB EVDS, Kraken). Borsa, konut, otomobil ve mevduat geçmişi ile tüm tahminler simüledir."
+      ? cap(realWords()) + " gerçek veridir (TCMB EVDS, Kraken). " + cap(simWords()) + " ile tüm tahminler simüledir."
       : "Bu sayfadaki fiyat geçmişi ve tahminler simüledir.";
   };
   function fixBadges(root) {
@@ -30,14 +39,14 @@
     });
     var w = document.createTreeWalker(root || document.body, NodeFilter.SHOW_TEXT), n;
     while ((n = w.nextNode())) if (n.nodeValue.indexOf("Prototipte tüm seriler simüledir.") >= 0)
-      n.nodeValue = n.nodeValue.replace("Prototipte tüm seriler simüledir.", "Döviz, altın, Bitcoin ve TÜFE serileri gerçek veridir; borsa, konut, otomobil ve mevduat serileri simüledir.");
+      n.nodeValue = n.nodeValue.replace("Prototipte tüm seriler simüledir.", cap(realWords()) + " gerçek veridir; " + simWords() + " simüledir.");
   }
   // The live box and footer are written by texgen.js; correct their "charts are simulated" wording once real history is in
   function fixTexts() {
     var sp = document.querySelector("#live .live-h span:last-child");
-    if (sp && /simüle/.test(sp.textContent)) sp.textContent = "Döviz, altın ve Bitcoin grafikleri gerçek geçmiş veridir; diğer grafikler ve tahminler simüledir.";
+    if (sp && /simüle/.test(sp.textContent)) sp.textContent = "Döviz, altın, Bitcoin" + (has("konut") ? ", konut" : "") + (has("mevduat") ? " ve mevduat" : "") + " grafikleri gerçek geçmiş veridir; diğer grafikler ve tahminler simüledir.";
     var ft = document.querySelector("#foot p");
-    if (ft) ft.textContent = 'ATLAS bir prototiptir. "Canlı piyasa" kutusu, kaynağı belirtilen haberler ile döviz, altın, Bitcoin ve enflasyon geçmişi gerçek veridir. Borsa, konut, otomobil ve mevduat geçmişi ile tahminler simüle edilmiştir. Hiçbiri yatırım tavsiyesi niteliği taşımaz.';
+    if (ft) ft.textContent = 'ATLAS bir prototiptir. "Canlı piyasa" kutusu, kaynağı belirtilen haberler ile ' + realWords() + ' gerçek veridir. ' + cap(simWords()) + ' ile tahminler simüle edilmiştir. Hiçbiri yatırım tavsiyesi niteliği taşımaz.';
   }
   function wrap(name, after) {
     var f = window[name]; if (typeof f !== "function") return;
@@ -52,6 +61,23 @@
     if (copy(RAW.btcUsd, h.btcUsd)) REAL.push("bitcoin");
     var b = ASSETS.bitcoin.tl; for (var i = 0; i < b.length; i++) b[i] = RAW.btcUsd[i] * RAW.usd[i];
     if (copy(RAW.cpiTR, h.cpiTR)) REAL.push("tufe");
+    // Housing: TCMB Konut Fiyat Endeksi replaces the simulated TL/m² series, so the card shows index points
+    if (copy(RAW.house, h.house)) {
+      REAL.push("konut");
+      var kd = h.houseLast ? ayYil(h.houseLast) : "";
+      ASSETS.konut.desc = "TCMB konut endeksi";
+      ASSETS.konut.descLong = "TCMB Konut Fiyat Endeksi" + (kd ? " (son veri " + kd + ")" : "");
+      ASSETS.konut.display = function (a) { return nf(1).format(a) + " puan"; };
+    }
+    // Deposit history: weekly TCMB average TL deposit rates by maturity replace the policy-rate model in a2.js
+    var dh = h.depHist;
+    if (dh && dh.m3 && dh.m6 && dh.y1 && typeof depMemo !== "undefined") {
+      var step = function (list) { return function (t) { var v = null; for (var j = 0; j < list.length && list[j][0] <= t; j++) v = list[j][1]; return v; }; };
+      var f3 = step(dh.m3), f6 = step(dh.m6), f12 = step(dh.y1);
+      window.DEP_REAL_TL = function (days, t) { return days >= 365 ? f12(t) : days >= 182 ? f6(t) : f3(t); };
+      depMemo.clear();
+      REAL.push("mevduat");
+    }
     if (!REAL.length) return;
     // Every view reads these arrays at render time, so re-rendering picks up the real data
     renderMarkets(); renderHomeChart(); renderHomeForecasts();

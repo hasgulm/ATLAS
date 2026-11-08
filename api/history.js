@@ -38,9 +38,10 @@ module.exports = async (req, res) => {
   const jobs = await Promise.allSettled([
     evds(fx, "01-10-2019", "31-12-2021"), evds(fx, "01-01-2022", "30-06-2024"), evds(fx, "01-07-2024", today),
     evds(["TP.TUKFIY2025.GENEL"], "01-09-2018", today),
-    evds(["TP.TRY.MT02", "TP.TRY.MT03", "TP.TRY.MT04"], dmy(new Date(Date.now() - 60 * 864e5)), today),
+    evds(["TP.TRY.MT02", "TP.TRY.MT03", "TP.TRY.MT04"], "01-07-2019", today),
     evds(["TP.MK.KUL.YTL"], "01-10-2019", "31-12-2019"),
-    kraken("XBTUSD"), kraken("PAXGUSD")
+    kraken("XBTUSD"), kraken("PAXGUSD"),
+    evds(["TP.KFE.TR"], "01-01-2019", today), evds(["TP.HKFE01"], "01-01-2019", today)
   ]);
   const val = (i) => (jobs[i].status === "fulfilled" ? jobs[i].value : null);
   const errs = jobs.map((j, i) => (j.status === "rejected" ? i + ": " + String(j.reason).slice(0, 60) : null)).filter(Boolean);
@@ -74,11 +75,31 @@ module.exports = async (req, res) => {
     if (prev) out.cpiYoy = { d: ld, v: (lv / prev - 1) * 100 };
     if (out.cpiTR) out.sources.cpi = "TCMB EVDS (TÜİK TÜFE)";
   }
-  // Latest average TL deposit rates by maturity bucket
+  // Average TL deposit rates by maturity bucket (weekly, TCMB): latest value + history since mid-2019
   const dep = val(4);
   if (dep && dep.length) {
     const lastOf = (f) => { const r = dep.filter((x) => x[f] != null).pop(); return r ? { d: r.Tarih, v: +r[f] } : undefined; };
     out.deposit = { m3: lastOf("TP_TRY_MT02"), m6: lastOf("TP_TRY_MT03"), y1: lastOf("TP_TRY_MT04") };
+    // [ms timestamp, % rate] pairs, sorted; the app turns them into step functions
+    const hist = (f) => {
+      const h = dep.filter((x) => x[f] != null && /^\d{2}-\d{2}-\d{4}$/.test(x.Tarih)).map((x) => [dayTs(x.Tarih), +(+x[f]).toFixed(2)]).sort((a, b) => a[0] - b[0]);
+      return h.length > 100 && h[0][0] <= START ? h : undefined;
+    };
+    const dh = { m3: hist("TP_TRY_MT02"), m6: hist("TP_TRY_MT03"), y1: hist("TP_TRY_MT04") };
+    if (dh.m3 && dh.m6 && dh.y1) { out.depHist = dh; out.sources.deposit = "TCMB EVDS"; }
+  }
+  // Housing: TCMB Konut Fiyat Endeksi (monthly, published with ~2 months lag), carried forward to the grid date
+  for (const [i, code] of [[8, "TP.KFE.TR"], [9, "TP.HKFE01"]]) {
+    const f = code.replace(/\./g, "_");
+    const rows = (val(i) || []).filter((r) => r[f] != null && /^\d{4}-\d{1,2}$/.test(r.Tarih)).map((r) => [r.Tarih, +r[f]]);
+    if (rows.length < 12) continue;
+    const m = Object.fromEntries(rows);
+    let last = null;
+    const s = full(GRID.map((t) => (last = m[ym(t)] != null ? m[ym(t)] : last)));
+    if (!s) continue;
+    out.house = s; out.houseLast = rows[rows.length - 1][0];
+    out.sources.house = code === "TP.KFE.TR" ? "TCMB Konut Fiyat Endeksi" : "TCMB Hedonik Konut Fiyat Endeksi";
+    break;
   }
   if (errs.length) out.errors = errs;
   const ok = out.usd || out.btcUsd || out.cpiTR;
