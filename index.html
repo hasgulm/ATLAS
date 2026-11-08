@@ -27,7 +27,7 @@ img{max-width:100%}
       <a href="#karsilastir" data-view="karsilastir"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V9M10 19V5M16 19v-7M22 19H2"/></svg><span class="lg" data-short="Karşılaştır">Yatırımları Karşılaştır</span></a>
       <a href="#tahmin" data-view="tahmin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 3 8-8"/><path d="M15 7h5v5"/></svg><span class="lg" data-short="Tahminler">Gelecek Tahminleri</span></a>
       <a href="#arac" data-view="arac"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17h14M3 17v-4l2.2-5.2A2 2 0 0 1 7 6.6h10a2 2 0 0 1 1.8 1.2L21 13v4"/><path d="M3 13h18"/><circle cx="7.5" cy="17.5" r="1.8"/><circle cx="16.5" cy="17.5" r="1.8"/></svg><span class="lg" data-short="Araç">Araç Fiyatları</span></a>
-      <a href="#harita" data-view="harita"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg><span class="lg" data-short="Harita">Dünya Haritası</span></a>
+      <a href="#harita" data-view="harita"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg><span class="lg" data-short="Gündem">Dünya Gündemi</span></a>
     </nav>
     <div class="top-right">
       <button type="button" class="proto" data-info="1" aria-haspopup="dialog">Hangi veriler gerçek?</button>
@@ -75,12 +75,12 @@ img{max-width:100%}
     <div class="section">
       <div class="sec-head">
         <div><span class="eyebrow">Gündem</span><h2 class="h-sec">Dünyada piyasaları etkileyen gelişmeler</h2></div>
-        <a class="link-more" href="#harita">Haritada keşfet →</a>
+        <a class="link-more" href="#harita">Gündemi aç →</a>
       </div>
       <div class="world">
-        <div class="globe-prev" id="homeGlobeWrap">
-          <div class="gcanvas" id="homeGlobe"></div>
-          <div class="cap"><div><div class="t">Bugün dünyada neler oluyor?</div><div class="s">Parlayan noktalara dokunun</div></div><a class="btn" href="#harita">Haritayı aç</a></div>
+        <div id="homeMapWrap">
+          <div class="gd-mapbox"><svg id="homeMap" viewBox="0 40 1000 400" role="img" aria-label="Son 7 günün haber konuları dünya haritasında"></svg></div>
+          <div class="gd-cap"><div><div class="t">Bu hafta dünyada neler oluyor?</div><div class="s">Bir konuya dokunun, ne anlama geldiğini görün</div></div><a class="btn" href="#harita">Gündemi aç</a></div>
         </div>
         <div class="news" id="homeNews"></div>
       </div>
@@ -174,23 +174,23 @@ img{max-width:100%}
 </section>
 
 <!-- ================= DÜNYA HARİTASI ================= -->
-<section class="view gpage" id="v-harita" data-view="harita" hidden>
+<section class="view" id="v-harita" data-view="harita" hidden>
   <div class="wrap">
-    <div class="gbar">
-      <div><h1>Dünya Haritası</h1><p class="sub">Piyasaları etkileyebilecek gelişmeleri keşfedin.</p></div>
-      <div class="gfil">
-        <div class="seg" id="gTime" role="group" aria-label="Zaman aralığı"></div>
-        <input type="date" id="gDate" hidden aria-label="Tarih seç" min="2026-09-01" max="2026-10-20">
-      </div>
+    <div class="gd-bar">
+      <div><h1>Dünya Gündemi</h1><p class="sub">Piyasaları etkileyen gelişmeler konu konu. Bir balona dokunun, Türkiye'deki yatırımlarınız için ne anlama geldiğini görün.</p></div>
+      <div class="seg gd-seg" id="gdTime" role="group" aria-label="Zaman aralığı"></div>
     </div>
-    <div class="chips" id="gAssets" style="margin-bottom:14px"></div>
-    <div class="gstage" id="gStage">
-      <div class="gcanvas" id="bigGlobe"></div>
-      <div class="gcount" id="gCount"></div>
-      <div class="zoom"><button id="zIn" aria-label="Yakınlaştır">+</button><button id="zOut" aria-label="Uzaklaştır">−</button></div>
-      <div class="ghint">Sürükleyerek çevirin · Kaydırarak yakınlaştırın</div>
-      <div class="ghover" id="gHover"></div>
-      <aside class="gpanel" aria-live="polite"><div class="gpanel-scroll" id="gPanel"></div></aside>
+    <div class="gd" id="gdRoot">
+      <div class="gd-top"><span class="gd-count" id="gdCount"></span></div>
+      <div class="gd-strip" id="gdStrip" role="tablist" aria-label="Konular"></div>
+      <div class="gd-body">
+        <div class="gd-left">
+          <div class="gd-mapbox"><svg id="gdMap" viewBox="0 40 1000 400" role="img" aria-label="Dünya haritası üzerinde haber konuları"></svg></div>
+          <p class="gd-legend">Balon boyutu haber sayısını, rengi konunun en çok ilgilendirdiği yatırımı gösterir. Kesik çizgiler gelişmenin Türkiye'ye bağlantısını gösterir.</p>
+          <p class="note" id="gdNote"></p>
+        </div>
+        <div class="gd-detail" id="gdDetail" aria-live="polite"></div>
+      </div>
     </div>
   </div>
 </section>
@@ -212,14 +212,13 @@ img{max-width:100%}
 </main>
 <div id="tip" role="tooltip"></div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
 <script src="texgen.js"></script>
 <script src="a1.js"></script>
 <script src="a2.js"></script>
 <script src="a3.js"></script>
 <script src="a4.js"></script>
 <script src="a5.js"></script>
+<script src="gundem.js"></script>
 <script src="a6.js"></script>
 <script src="ux.js"></script>
 <script src="arac.js"></script>
