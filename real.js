@@ -25,10 +25,14 @@
     return w.length > 1 ? w.slice(0, -1).join(", ") + " ve " + w[w.length - 1] : w[0];
   };
   var realWords = function () { return "döviz, altın, Bitcoin" + (has("konut") ? ", konut" : "") + (has("mevduat") ? ", mevduat faizi" : "") + " ve enflasyon geçmişi"; };
+  // Assets whose 12-month forecast is anchored to the TCMB survey (filled by applyForecast)
+  var FCK = [];
+  window.ATLAS_FC = FCK;
+  var fcWords = function () { return "Dolar, euro, altın, konut ve otomobil tahminleri TCMB Piyasa Katılımcıları Anketi beklentilerine dayanır; borsa ve Bitcoin tahminleri simüledir."; };
   var cap = function (t) { return t.charAt(0).toLocaleUpperCase("tr-TR") + t.slice(1); };
   var SIM_TIP = function () {
     return REAL.length
-      ? cap(realWords()) + " gerçek veridir (TCMB EVDS, Kraken). " + cap(simWords()) + " ile tüm tahminler simüledir."
+      ? cap(realWords()) + " gerçek veridir (TCMB EVDS, Kraken). " + cap(simWords()) + (FCK.length ? " simüledir. " + fcWords() : " ile tüm tahminler simüledir.")
       : "Bu sayfadaki fiyat geçmişi ve tahminler simüledir.";
   };
   function fixBadges(root) {
@@ -44,9 +48,9 @@
   // The live box and footer are written by texgen.js; correct their "charts are simulated" wording once real history is in
   function fixTexts() {
     var sp = document.querySelector("#live .live-h span:last-child");
-    if (sp && /simüle/.test(sp.textContent)) sp.textContent = "Döviz, altın, Bitcoin" + (has("konut") ? ", konut" : "") + (has("mevduat") ? " ve mevduat" : "") + " grafikleri gerçek geçmiş veridir; diğer grafikler ve tahminler simüledir.";
+    if (sp && /simüle/.test(sp.textContent)) sp.textContent = "Döviz, altın, Bitcoin" + (has("konut") ? ", konut" : "") + (has("mevduat") ? " ve mevduat" : "") + " grafikleri gerçek geçmiş veridir; diğer grafikler " + (FCK.length ? "simüledir, tahminler TCMB anketine dayanır." : "ve tahminler simüledir.");
     var ft = document.querySelector("#foot p");
-    if (ft) ft.textContent = 'ATLAS bir prototiptir. "Canlı piyasa" kutusu, kaynağı belirtilen haberler ile ' + realWords() + ' gerçek veridir. ' + cap(simWords()) + ' ile tahminler simüle edilmiştir. Hiçbiri yatırım tavsiyesi niteliği taşımaz.';
+    if (ft) ft.textContent = 'ATLAS bir prototiptir. "Canlı piyasa" kutusu, kaynağı belirtilen haberler ile ' + realWords() + ' gerçek veridir. ' + cap(simWords()) + (FCK.length ? ' simüle edilmiştir. ' + fcWords() : ' ile tahminler simüle edilmiştir.') + ' Hiçbiri yatırım tavsiyesi niteliği taşımaz.';
   }
   function wrap(name, after) {
     var f = window[name]; if (typeof f !== "function") return;
@@ -171,7 +175,41 @@
     depNote(); calcFx(); calcDep(); calcReal();
   }
 
+  // --- Forecasts: anchor the 12-month base case to TCMB Piyasa Katılımcıları Anketi expectations ---
+  // The optimistic/pessimistic range still comes from the last two years' volatility (a1.js A.scenarios).
+  function when(d) { return /^\d{4}-\d{1,2}$/.test(d) ? ayYil(d) : String(d).split("-").join("."); }
+  function applyForecast(f) {
+    if (typeof FORECAST_ASSUMPTIONS === "undefined" || !f) return;
+    var fa = FORECAST_ASSUMPTIONS, now = (L && L.usd) || RAW.usd[N - 1], src = "Kaynak: TCMB Piyasa Katılımcıları Anketi";
+    var rng = "İyimser ve kötümser aralık, son iki yıldaki fiyat dalgalanmasından hesaplandı.";
+    FCK.length = 0;
+    if (f.usd12 && f.usd12.v > 5 && now) {
+      var u = f.usd12.v / now - 1;
+      if (u > -0.5 && u < 2) {
+        var us = src + " (" + when(f.usd12.d) + "), 12 ay sonrası dolar/TL beklentisi " + nf(2).format(f.usd12.v) + " ₺; bugün " + nf(2).format(now) + " ₺.";
+        fa.dolar.base = u; fa.dolar.notes = [us, "Beklenen değişim bu iki kur arasındaki farktır.", rng];
+        fa.euro.base = u; fa.euro.notes = [us, "Euro/dolar paritesinin değişmeyeceği varsayıldı; euro/TL de dolar/TL kadar değişir.", rng];
+        fa.altin.base = u; fa.altin.notes = [us, "Ons altının dolar fiyatının değişmeyeceği varsayıldı; gram altın TL'de dolar/TL kadar değişir.", rng];
+        ["dolar", "euro", "altin"].forEach(function (k) { fa[k].how = "Beklenen değişim, TCMB anketindeki 12 ay sonrası dolar/TL beklentisinden gelir."; });
+        FCK.push("dolar", "euro", "altin");
+      }
+    }
+    if (f.cpi12 && f.cpi12.v > 0 && f.cpi12.v < 200) {
+      var c = f.cpi12.v / 100, cs = src + " (" + when(f.cpi12.d) + "), 12 ay sonrası yıllık enflasyon beklentisi %" + nf(1).format(f.cpi12.v) + ".";
+      fa.konut.base = c; fa.konut.notes = [cs, "Konut fiyatlarının beklenen enflasyon kadar artacağı varsayıldı.", rng];
+      fa.otomobil.base = c; fa.otomobil.notes = [cs, "Araç fiyatlarının beklenen enflasyon kadar artacağı varsayıldı.", rng];
+      fa.konut.how = fa.otomobil.how = "Beklenen değişim, TCMB anketindeki 12 ay sonrası yıllık enflasyon beklentisinden gelir.";
+      FCK.push("konut", "otomobil");
+    }
+    if (!FCK.length) return;
+    renderHomeForecasts();
+    if ((location.hash || "#ana").slice(1) === "tahmin") renderForecast();
+    fixBadges(); fixTexts();
+  }
+
   var pL = get("/api/live").then(function (d) { L = d; }).catch(function () {});
   var pH = get("/api/history").then(function (h) { H = h; applyHistory(h); applyCalcDefaults(); }).catch(function () {});
   Promise.all([pL, pH]).then(function () { if (L && (L.usd || L.btc)) renderCalcs(); });
+  // After live + history, so "today" for the dollar expectation is the live rate
+  Promise.all([pL, pH]).then(function () { return get("/api/forecast"); }).then(applyForecast).catch(function () {});
 })();
